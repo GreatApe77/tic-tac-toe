@@ -80,76 +80,131 @@ function pontuarMatriz(index, symbol) {
 }
 
 //verificarJogoDaVelha()
-botoes.forEach((botao,key) => {
+botoes.forEach((botao, key) => {
 	botao.addEventListener("click", (e) => {
 		botao.setAttribute("disabled", "");
 		if (vezDoPrimeiro) {
 			botao.innerText = "O";
 			vezDoPrimeiro = false;
 		} else {
-            botao.innerText = "X";
+			botao.innerText = "X";
 			vezDoPrimeiro = true;
 		}
-        pontuarMatriz(key,botao.innerText)
-        avaliarLinha(0,matrizDoJogo)
-        avaliarLinha(1,matrizDoJogo)
-        avaliarLinha(2,matrizDoJogo)
-        avaliarColuna(0,matrizDoJogo)
-        avaliarColuna(1,matrizDoJogo)
-        avaliarColuna(2,matrizDoJogo)
+		pontuarMatriz(key, botao.innerText);
+		avaliarLinha(0, matrizDoJogo);
+		avaliarLinha(1, matrizDoJogo);
+		avaliarLinha(2, matrizDoJogo);
+		avaliarColuna(0, matrizDoJogo);
+		avaliarColuna(1, matrizDoJogo);
+		avaliarColuna(2, matrizDoJogo);
+		avaliarDiagonalPrincipal(matrizDoJogo);
+        avaliarDiagonaSecundaria(matrizDoJogo)
 	});
 });
 
-function algorimoMatriz(){
-    
+function algorimoMatriz() {}
+function avaliarLinha(indiceDaLinha, matriz) {
+	let p1Counter = 0;
+	let p2Counter = 0;
+	//console.log(matriz[indiceDaLinha])
+	for (let i = 0; i < matriz[indiceDaLinha].length; i++) {
+		if (matriz[indiceDaLinha][i] === "O") {
+			p1Counter++;
+		}
+		if (matriz[indiceDaLinha][i] === "X") {
+			p2Counter++;
+		}
+	}
+	//console.log({p1Counter,p2Counter})
+	if (p1Counter === 3) {
+		alert("Player 1 ganhou");
+		return;
+	}
+	if (p2Counter === 3) {
+		alert("Player 2 ganhou");
+		return;
+	}
+}
+function avaliarColuna(indiceDaColuna, matriz) {
+	let coluna = [];
+	let p1Counter = 0;
+	let p2Counter = 0;
+	for (let i = 0; i < matriz.length; i++) {
+		coluna.push(matriz[i][indiceDaColuna]);
+		if (coluna[i] === "O") {
+			p1Counter++;
+		}
+		if (coluna[i] === "X") {
+			p2Counter++;
+		}
+	}
+	if (p1Counter === 3) {
+		alert("Player 1 ganhou");
+		return;
+	}
+	if (p2Counter === 3) {
+		alert("Player 2 ganhou");
+		return;
+	}
+}
 
+function avaliarDiagonalPrincipal(matriz) {
+	let diagonalPrincipal = [];
+	let p1Counter = 0;
+	let p2Counter = 0;
+
+	for (let i = 0; i < matriz.length; i++) {
+		for (let j = 0; j < matriz.length; j++) {
+			if (i === j) {
+				diagonalPrincipal.push(matriz[i][j]);
+			}
+		}
+		if (diagonalPrincipal[i] === "O") {
+			p1Counter++;
+		}
+		if (diagonalPrincipal[i] === "X") {
+			p2Counter++;
+		}
+	}
+	if (p1Counter === 3) {
+		alert("Player 1 ganhou");
+		return;
+	}
+	if (p2Counter === 3) {
+		alert("Player 2 ganhou");
+		return;
+	}
+
+	//console.log(diagonalPrincipal);
 }
-function avaliarLinha(indiceDaLinha,matriz){
-    let p1Counter = 0
-    let p2Counter = 0
-    //console.log(matriz[indiceDaLinha])
-    for (let i = 0; i < matriz[indiceDaLinha].length; i++) {
-        if(matriz[indiceDaLinha][i]==="O"){
-            p1Counter++
-        }
-        if(matriz[indiceDaLinha][i] ==="X"){
-            p2Counter++
-        }
-        
-    }
-    //console.log({p1Counter,p2Counter})
-    if(p1Counter===3){
-        alert("Player 1 ganhou")
-        return
-    }
-    if(p2Counter===3){
-        alert("Player 2 ganhou")
-        return
-    }
-}
-function avaliarColuna(indiceDaColuna,matriz){
-    let coluna =[]
-    let p1Counter = 0
-    let p2Counter = 0
-    for (let i = 0; i < matriz.length; i++) {
-        coluna.push(matriz[i][indiceDaColuna])    
-        if(coluna[i] ==="O"){
-            p1Counter++
-        }
-        if(coluna[i] ==="X"){
-            p2Counter++
-        }
-    }
-    if(p1Counter===3){
-        alert("Player 1 ganhou")
-        return
-    }
-    if(p2Counter===3){
-        alert("Player 2 ganhou")
-        return
-    }
-    
-    
+function avaliarDiagonaSecundaria(matriz) {
+	let diagonalSecundaria = [];
+	let p1Counter = 0;
+	let p2Counter = 0;
+
+	for (let i = 0; i < matriz.length; i++) {
+		for (let j = 0; j < matriz.length; j++) {
+			if (i + j === 2) {
+				diagonalSecundaria.push(matriz[i][j]);
+			}
+		}
+        if (diagonalSecundaria[i] === "O") {
+			p1Counter++;
+		}
+		if (diagonalSecundaria[i] === "X") {
+			p2Counter++;
+		}
+	}
+    if (p1Counter === 3) {
+		alert("Player 1 ganhou");
+		return;
+	}
+	if (p2Counter === 3) {
+		alert("Player 2 ganhou");
+		return;
+	}
+
+    console.log(diagonalSecundaria)
 }
 /*
         <div class="jogador-1">
