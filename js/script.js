@@ -1,22 +1,28 @@
-
 //ESCOLHER JOGADORES
-const chooseCharactersForm = document.getElementById("chooseCharactersForm")
+const chooseCharactersForm = document.getElementById("chooseCharactersForm");
 
-chooseCharactersForm.addEventListener("submit",(e)=>{
-    e.preventDefault()
-    const nomeJogador1 = document.getElementById("escolher-jogador-1-input").value
-    const nomeJogador2 = document.getElementById("escolher-jogador-2-input").value
-    const areaDePontuacao = document.getElementById("area-de-pontuacao")
+chooseCharactersForm.addEventListener("submit", (e) => {
+	e.preventDefault();
+	const nomeJogador1 = document.getElementById(
+		"escolher-jogador-1-input"
+	).value;
+	const nomeJogador2 = document.getElementById(
+		"escolher-jogador-2-input"
+	).value;
+	const areaDePontuacao = document.getElementById("area-de-pontuacao");
 
-    areaDePontuacao.append(criarCardJogador(1,nomeJogador1),criarCardJogador(2,nomeJogador2))
-    chooseCharactersForm.style.display = "none"
-    document.querySelector(".secao-jogo").style.display  ="block"
-})
+	areaDePontuacao.append(
+		criarCardJogador(1, nomeJogador1),
+		criarCardJogador(2, nomeJogador2)
+	);
+	chooseCharactersForm.style.display = "none";
+	document.querySelector(".secao-jogo").style.display = "block";
+});
 
-function criarCardJogador(numeroDoJogador,nomeDoJogador){
-    const container = document.createElement("div")
+function criarCardJogador(numeroDoJogador, nomeDoJogador) {
+	const container = document.createElement("div");
 
-    container.innerHTML = `
+	container.innerHTML = `
     <div class="jogador-${numeroDoJogador}">
             <h4>Jogador ${numeroDoJogador}:</h4>
             <p>Nome: <strong>${nomeDoJogador}</strong></p>
@@ -24,47 +30,70 @@ function criarCardJogador(numeroDoJogador,nomeDoJogador){
             <p>pontos: <strong id="pontos-jogador-${numeroDoJogador}">0</strong></p>
         </div>
     
-    `
-    return container
+    `;
+	return container;
 }
 
 //MARCAR PONTOS
-const botoes = document.querySelectorAll(".casas-itens-grid")
-console.log(botoes)
-let vezDoPrimeiro = true
+const botoes = document.querySelectorAll(".casas-itens-grid");
+console.log(botoes);
+let vezDoPrimeiro = true;
 let matrizDoJogo = [
-    ["O",0,0],
-    [0,"O",0],
-    [0,0,0]
-]
-function verificarJogoDaVelha(){
-    let p1Counter = 0,p2Counter = 0
-    for (let i = 0; i < matrizDoJogo.length; i++) {
-        
-        for (let j = 0; j < matrizDoJogo.length; j++) {
-            if(matrizDoJogo[i][j] ==="O"){
-                p1Counter++
-            }else{
-                p2Counter++
-            }
-            
-        }
-    }
-    console.log({p1Counter,p2Counter})
+	[0, 0, 0],
+	[0, 0, 0],
+	[0, 0, 0],
+];
+
+function pontuarMatriz(index, symbol) {
+	switch (index) {
+		case 0:
+			matrizDoJogo[0][0] = symbol;
+			break;
+		case 1:
+			matrizDoJogo[0][1] = symbol;
+			break;
+		case 2:
+			matrizDoJogo[0][2] = symbol;
+			break;
+		case 3:
+			matrizDoJogo[1][0] = symbol;
+			break;
+		case 4:
+			matrizDoJogo[1][1] = symbol;
+			break;
+		case 5:
+			matrizDoJogo[1][2] = symbol;
+			break;
+		case 6:
+			matrizDoJogo[2][0] = symbol;
+			break;
+		case 7:
+			matrizDoJogo[2][1] = symbol;
+			break;
+		case 8:
+			matrizDoJogo[2][2] = symbol;
+			break;
+
+		default:
+			break;
+	}
 }
-verificarJogoDaVelha()
-botoes.forEach((botao)=>{
-    botao.addEventListener("click",(e)=>{
-        botao.setAttribute("disabled","")
-        if(vezDoPrimeiro){
-            botao.innerText = "O"
-            vezDoPrimeiro = false
-        }else{
-            botao.innerText = "X"
-            vezDoPrimeiro = true
-        }
-    })
-})
+
+//verificarJogoDaVelha()
+botoes.forEach((botao,key) => {
+	botao.addEventListener("click", (e) => {
+		botao.setAttribute("disabled", "");
+		if (vezDoPrimeiro) {
+			botao.innerText = "O";
+			vezDoPrimeiro = false;
+		} else {
+            botao.innerText = "X";
+			vezDoPrimeiro = true;
+		}
+        pontuarMatriz(key,botao.innerText)
+        console.log(matrizDoJogo)
+	});
+});
 
 
 /*
