@@ -91,11 +91,66 @@ botoes.forEach((botao,key) => {
 			vezDoPrimeiro = true;
 		}
         pontuarMatriz(key,botao.innerText)
-        console.log(matrizDoJogo)
+        avaliarLinha(0,matrizDoJogo)
+        avaliarLinha(1,matrizDoJogo)
+        avaliarLinha(2,matrizDoJogo)
+        avaliarColuna(0,matrizDoJogo)
+        avaliarColuna(1,matrizDoJogo)
+        avaliarColuna(2,matrizDoJogo)
 	});
 });
 
+function algorimoMatriz(){
+    
 
+}
+function avaliarLinha(indiceDaLinha,matriz){
+    let p1Counter = 0
+    let p2Counter = 0
+    //console.log(matriz[indiceDaLinha])
+    for (let i = 0; i < matriz[indiceDaLinha].length; i++) {
+        if(matriz[indiceDaLinha][i]==="O"){
+            p1Counter++
+        }
+        if(matriz[indiceDaLinha][i] ==="X"){
+            p2Counter++
+        }
+        
+    }
+    //console.log({p1Counter,p2Counter})
+    if(p1Counter===3){
+        alert("Player 1 ganhou")
+        return
+    }
+    if(p2Counter===3){
+        alert("Player 2 ganhou")
+        return
+    }
+}
+function avaliarColuna(indiceDaColuna,matriz){
+    let coluna =[]
+    let p1Counter = 0
+    let p2Counter = 0
+    for (let i = 0; i < matriz.length; i++) {
+        coluna.push(matriz[i][indiceDaColuna])    
+        if(coluna[i] ==="O"){
+            p1Counter++
+        }
+        if(coluna[i] ==="X"){
+            p2Counter++
+        }
+    }
+    if(p1Counter===3){
+        alert("Player 1 ganhou")
+        return
+    }
+    if(p2Counter===3){
+        alert("Player 2 ganhou")
+        return
+    }
+    
+    
+}
 /*
         <div class="jogador-1">
             <h4>Jogador 1:</h4>
