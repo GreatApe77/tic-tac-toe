@@ -18,6 +18,9 @@
     background-color: #546c68;
     padding: 10px;
 }
+.secao-jogo{
+    padding: 20px;
+}
 .jogoDaVelhaGrid button{
   display: block;
   background-color: #e0e0e0;
