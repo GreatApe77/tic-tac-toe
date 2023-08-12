@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#chooseCharactersForm{
+    display: flex;
+    width: 100%;
+    max-width: 400px;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+}
+.jogoDaVelhaGrid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #546c68;
+    padding: 10px;
+}
+.jogoDaVelhaGrid button{
+  display: block;
+  background-color: #e0e0e0;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
