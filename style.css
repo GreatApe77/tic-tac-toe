@@ -16,6 +16,20 @@ body{
     align-items: center;
     margin: auto;
 }
+#chooseCharactersForm input[type="text"]{
+    border: 0;
+    border-radius: 4px;
+    padding: 6px;
+    font-weight: bold;
+    background-color: #c8c8c8;
+    color: #4d4d4d;
+    margin-bottom: 20px;
+}
+#chooseCharactersForm label{
+    font-size: 20px;
+    color: #d1d1d1;
+    margin-bottom: 12px;
+}
 .jogoDaVelhaGrid{
     display: grid;
     grid-template-columns: auto auto auto;
@@ -61,4 +75,37 @@ body{
 .jogador-2-vitoria{
     color: #e39125
 }
+.gen-button{
+    padding: 8px;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #8dcd45;
+    border-color: #8dcd45;
+    color: #2a3d3a;
+    transition: all 0.3s;
+}
+.gen-button:hover{
+    background-color: #2a3d3a;
+    color: #8dcd45;
+}
+.gen-button-exit{
+    padding: 8px;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #fff53a;
+    border-color: #fff53a;
+    color: #2a3d3a;
+    transition: all 0.3s;
+}
+.gen-button-exit:hover{
+    background-color: #2a3d3a;
+    color:#fff53a;
+}
+
 

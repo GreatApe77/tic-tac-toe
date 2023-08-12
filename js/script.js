@@ -259,9 +259,13 @@ function mostrarVencedor(nomeDoJogador, numeroDoJogador) {
 	container.id = "card-resultado";
 	container.innerHTML = `
         <h1 class="jogador-${numeroDoJogador}-vitoria">O Jogador ${numeroDoJogador} Venceu </h1>
+        <br>
         <h3>Nome: ${nomeDoJogador}</h3>
-        <div><button onclick="reiniciar()">JOGAR NOVAMENTE</button></div>
-    `;
+        <br>
+        <div><button class="gen-button" onclick="reiniciar()">JOGAR NOVAMENTE</button></div>
+        <br>
+        <div><button class="gen-button-exit" onclick="refresh()">TROCAR JOGADORES</button></div>
+        `;
 	return container;
 }
 
@@ -270,9 +274,11 @@ function mostrarEmpate(){
     const container = document.createElement("div")
     container.id = "card-resultado";
     container.innerHTML = `
-        <h1 style="text-align:center;color=#067e2b">EMPATE!</h1>
-        <div><button onclick="reiniciar()">JOGAR NOVAMENTE</button></div>
-    `
+        <h1 style="text-align:center;">EMPATE!</h1>
+        <div><button class="gen-button" onclick="reiniciar()">JOGAR NOVAMENTE</button></div>
+        <br><br>
+        <div><button class="gen-button-exit" onclick="refresh()">TROCAR JOGADORES</button></div>
+        `
     return container
 }
 
@@ -291,4 +297,10 @@ function reiniciar() {
 		botao.style.color = "#000";
 		botao.innerText = ".";
 	});
+    document.getElementById("area-de-pontuacao").append(criarCardJogador(1,nomeJogador1))
+    document.getElementById("area-de-pontuacao").append(criarCardJogador(2,nomeJogador2))
+
+}
+function refresh(){
+    location.reload()
 }
