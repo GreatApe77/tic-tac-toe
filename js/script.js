@@ -33,10 +33,26 @@ const botoes = document.querySelectorAll(".casas-itens-grid")
 console.log(botoes)
 let vezDoPrimeiro = true
 let matrizDoJogo = [
-    [0,0,0],
-    [0,0,0],
+    ["O",0,0],
+    [0,"O",0],
     [0,0,0]
 ]
+function verificarJogoDaVelha(){
+    let p1Counter = 0,p2Counter = 0
+    for (let i = 0; i < matrizDoJogo.length; i++) {
+        
+        for (let j = 0; j < matrizDoJogo.length; j++) {
+            if(matrizDoJogo[i][j] ==="O"){
+                p1Counter++
+            }else{
+                p2Counter++
+            }
+            
+        }
+    }
+    console.log({p1Counter,p2Counter})
+}
+verificarJogoDaVelha()
 botoes.forEach((botao)=>{
     botao.addEventListener("click",(e)=>{
         botao.setAttribute("disabled","")
