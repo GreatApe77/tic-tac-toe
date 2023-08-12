@@ -34,3 +34,9 @@
     padding: 20px;
     justify-content: space-around;
 }
+.jogador-1 h4{
+    color: #0c5cb6;
+}
+.jogador-2 h4{
+    color: #e39125;
+}
