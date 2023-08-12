@@ -1,12 +1,13 @@
 //ESCOLHER JOGADORES
 const chooseCharactersForm = document.getElementById("chooseCharactersForm");
-
+let nomeJogador1 = ""
+let nomeJogador2 = ""
 chooseCharactersForm.addEventListener("submit", (e) => {
 	e.preventDefault();
-	const nomeJogador1 = document.getElementById(
+	 nomeJogador1 = document.getElementById(
 		"escolher-jogador-1-input"
 	).value;
-	const nomeJogador2 = document.getElementById(
+	 nomeJogador2 = document.getElementById(
 		"escolher-jogador-2-input"
 	).value;
 	const areaDePontuacao = document.getElementById("area-de-pontuacao");
@@ -24,7 +25,7 @@ function criarCardJogador(numeroDoJogador, nomeDoJogador) {
 
 	container.innerHTML = `
     <div class="jogador-${numeroDoJogador}">
-            <h4>Jogador ${numeroDoJogador}:</h4>
+            <h2 >Jogador ${numeroDoJogador}:</h2>
             <p>Nome: <strong id="jogador-${nomeDoJogador}">${nomeDoJogador}</strong></p>
         </div>
     
@@ -126,12 +127,14 @@ function avaliarLinha(indiceDaLinha, matriz) {
 	}
 	//console.log({p1Counter,p2Counter})
 	if (p1Counter === 3) {
-		alert("Player 1 ganhou");
+		//alert("Player 1 ganhou");
+        document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
         fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
-		alert("Player 2 ganhou");
+		//alert("Player 2 ganhou");
+        document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
         fimDeJogo = true
 		return;
 	}
@@ -150,12 +153,12 @@ function avaliarColuna(indiceDaColuna, matriz) {
 		}
 	}
 	if (p1Counter === 3) {
-		alert("Player 1 ganhou");
+		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
         fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
-		alert("Player 2 ganhou");
+		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
         fimDeJogo = true
 		return;
 	}
@@ -180,12 +183,13 @@ function avaliarDiagonalPrincipal(matriz) {
 		}
 	}
 	if (p1Counter === 3) {
-		alert("Player 1 ganhou");
+		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
         fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
-		alert("Player 2 ganhou");
+        document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
+
         fimDeJogo = true
 		return;
 	}
@@ -211,12 +215,12 @@ function avaliarDiagonaSecundaria(matriz) {
 		}
 	}
     if (p1Counter === 3) {
-		alert("Player 1 ganhou");
+		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
         fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
-		alert("Player 2 ganhou");
+		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
         fimDeJogo = true
 		return;
 	}
@@ -237,17 +241,16 @@ function checarEmpate(){
         return
     }
 }
-/*
-        <div class="jogador-1">
-            <h4>Jogador 1:</h4>
-            <p>Nome: <strong>Mateus</strong></p>
 
-            <p>pontos: <strong>0</strong></p>
-        </div>
-        <div class="jogador-2">
-            <h4>Jogador 2:</h4>
-            
-            <p>Nome: <strong>Eduardo</strong></p>
-            <p>pontos: <strong>2</strong></p>
-        </div>
-*/
+//ACERTAR VITORIA
+
+function mostrarVencedor(nomeDoJogador,numeroDoJogador){
+
+    document.getElementById("area-de-pontuacao").innerHTML = ""
+    const container = document.createElement("div")
+    container.innerHTML = `
+        <h1 class="jogador-${numeroDoJogador}-vitoria">O Jogador ${numeroDoJogador} Venceu </h1>
+        <h3>Nome: ${nomeDoJogador}</h3>
+    `
+    return container
+} 

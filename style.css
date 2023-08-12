@@ -1,9 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Ubuntu', sans-serif;
 }
-
+body{
+    background-color: #2a3d3a;
+}
 #chooseCharactersForm{
     display: flex;
     width: 100%;
@@ -15,32 +19,46 @@
 .jogoDaVelhaGrid{
     display: grid;
     grid-template-columns: auto auto auto;
-    background-color: #546c68;
-    padding: 10px;
+    background-color:#2a3d3a;
+    padding: 20px;
+    gap: 10px;
 }
 .secao-jogo{
     padding: 20px;
 }
 .jogoDaVelhaGrid button{
   display: block;
-  background-color: #e0e0e0;
+  background-color: #000000;
   border: 1px solid rgba(0, 0, 0, 0.8);
   padding: 20px;
-  font-size: 30px;
+  font-size: 35px;
   text-align: center;
+  color: #000000;
+  border-radius: 20px;
 }
 .area-de-pontuacao{
     display: flex;
     padding: 20px;
     justify-content: space-around;
 }
-.jogador-1 h4{
+.jogador-1 h2{
     color: #0c5cb6;
 }
-.jogador-2 h4{
+.jogador-2 h2{
     color: #e39125;
 }
-.casas-itens-grid{
+.jogador-1 h1{
+    color: #0c5cb6;
+}
+.jogador-2 h1{
+    color: #e39125;
+}
 
+.jogador-1-vitoria{
+    color: #0c5cb6;
+}
+
+.jogador-2-vitoria{
+    color: #0c5cb6;
 }
 
