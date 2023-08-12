@@ -25,9 +25,7 @@ function criarCardJogador(numeroDoJogador, nomeDoJogador) {
 	container.innerHTML = `
     <div class="jogador-${numeroDoJogador}">
             <h4>Jogador ${numeroDoJogador}:</h4>
-            <p>Nome: <strong>${nomeDoJogador}</strong></p>
-
-            <p>pontos: <strong id="pontos-jogador-${numeroDoJogador}">0</strong></p>
+            <p>Nome: <strong id="jogador-${nomeDoJogador}">${nomeDoJogador}</strong></p>
         </div>
     
     `;
@@ -43,7 +41,7 @@ let matrizDoJogo = [
 	[0, 0, 0],
 	[0, 0, 0],
 ];
-
+let fimDeJogo =false
 function pontuarMatriz(index, symbol) {
 	switch (index) {
 		case 0:
@@ -79,30 +77,41 @@ function pontuarMatriz(index, symbol) {
 	}
 }
 
-//verificarJogoDaVelha()
+
 botoes.forEach((botao, key) => {
 	botao.addEventListener("click", (e) => {
 		botao.setAttribute("disabled", "");
+        
+        botao.dataset.isActive = 1
+        console.log(botao.dataset.isActive)
 		if (vezDoPrimeiro) {
 			botao.innerText = "O";
-			vezDoPrimeiro = false;
+			e.target.style.color = "#0c5cb6"
+            vezDoPrimeiro = false;
 		} else {
 			botao.innerText = "X";
+            e.target.style.color = "#e39125"
 			vezDoPrimeiro = true;
 		}
 		pontuarMatriz(key, botao.innerText);
-		avaliarLinha(0, matrizDoJogo);
-		avaliarLinha(1, matrizDoJogo);
-		avaliarLinha(2, matrizDoJogo);
-		avaliarColuna(0, matrizDoJogo);
-		avaliarColuna(1, matrizDoJogo);
-		avaliarColuna(2, matrizDoJogo);
-		avaliarDiagonalPrincipal(matrizDoJogo);
-        avaliarDiagonaSecundaria(matrizDoJogo)
+        algorimoMatriz()
 	});
 });
 
-function algorimoMatriz() {}
+function algorimoMatriz() {
+    avaliarLinha(0, matrizDoJogo);
+    avaliarLinha(1, matrizDoJogo);
+    avaliarLinha(2, matrizDoJogo);
+    avaliarColuna(0, matrizDoJogo);
+    avaliarColuna(1, matrizDoJogo);
+    avaliarColuna(2, matrizDoJogo);
+    avaliarDiagonalPrincipal(matrizDoJogo);
+    avaliarDiagonaSecundaria(matrizDoJogo)
+    if(!fimDeJogo){
+        checarEmpate()
+    }
+    
+}
 function avaliarLinha(indiceDaLinha, matriz) {
 	let p1Counter = 0;
 	let p2Counter = 0;
@@ -118,10 +127,12 @@ function avaliarLinha(indiceDaLinha, matriz) {
 	//console.log({p1Counter,p2Counter})
 	if (p1Counter === 3) {
 		alert("Player 1 ganhou");
+        fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
 		alert("Player 2 ganhou");
+        fimDeJogo = true
 		return;
 	}
 }
@@ -140,10 +151,12 @@ function avaliarColuna(indiceDaColuna, matriz) {
 	}
 	if (p1Counter === 3) {
 		alert("Player 1 ganhou");
+        fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
 		alert("Player 2 ganhou");
+        fimDeJogo = true
 		return;
 	}
 }
@@ -168,10 +181,12 @@ function avaliarDiagonalPrincipal(matriz) {
 	}
 	if (p1Counter === 3) {
 		alert("Player 1 ganhou");
+        fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
 		alert("Player 2 ganhou");
+        fimDeJogo = true
 		return;
 	}
 
@@ -197,14 +212,30 @@ function avaliarDiagonaSecundaria(matriz) {
 	}
     if (p1Counter === 3) {
 		alert("Player 1 ganhou");
+        fimDeJogo = true
 		return;
 	}
 	if (p2Counter === 3) {
 		alert("Player 2 ganhou");
+        fimDeJogo = true
 		return;
 	}
 
-    console.log(diagonalSecundaria)
+    //console.log(diagonalSecundaria)
+}
+function checarEmpate(){
+    let counter = 0
+    for (let i = 0; i < botoes.length; i++) {
+        if(Number(botoes[i].dataset.isActive) ===1){
+            counter++
+        }
+        
+    }
+    console.log(counter)
+    if(counter===9){
+        alert("EMPATE")
+        return
+    }
 }
 /*
         <div class="jogador-1">
