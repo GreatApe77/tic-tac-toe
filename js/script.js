@@ -1,15 +1,11 @@
 //ESCOLHER JOGADORES
 const chooseCharactersForm = document.getElementById("chooseCharactersForm");
-let nomeJogador1 = ""
-let nomeJogador2 = ""
+let nomeJogador1 = "";
+let nomeJogador2 = "";
 chooseCharactersForm.addEventListener("submit", (e) => {
 	e.preventDefault();
-	 nomeJogador1 = document.getElementById(
-		"escolher-jogador-1-input"
-	).value;
-	 nomeJogador2 = document.getElementById(
-		"escolher-jogador-2-input"
-	).value;
+	nomeJogador1 = document.getElementById("escolher-jogador-1-input").value;
+	nomeJogador2 = document.getElementById("escolher-jogador-2-input").value;
 	const areaDePontuacao = document.getElementById("area-de-pontuacao");
 
 	areaDePontuacao.append(
@@ -42,7 +38,7 @@ let matrizDoJogo = [
 	[0, 0, 0],
 	[0, 0, 0],
 ];
-let fimDeJogo =false
+let fimDeJogo = false;
 function pontuarMatriz(index, symbol) {
 	switch (index) {
 		case 0:
@@ -78,40 +74,38 @@ function pontuarMatriz(index, symbol) {
 	}
 }
 
-
 botoes.forEach((botao, key) => {
 	botao.addEventListener("click", (e) => {
 		botao.setAttribute("disabled", "");
-        
-        botao.dataset.isActive = 1
-        console.log(botao.dataset.isActive)
+
+		botao.dataset.isActive = 1;
+		console.log(botao.dataset.isActive);
 		if (vezDoPrimeiro) {
 			botao.innerText = "O";
-			e.target.style.color = "#0c5cb6"
-            vezDoPrimeiro = false;
+			e.target.style.color = "#0c5cb6";
+			vezDoPrimeiro = false;
 		} else {
 			botao.innerText = "X";
-            e.target.style.color = "#e39125"
+			e.target.style.color = "#e39125";
 			vezDoPrimeiro = true;
 		}
 		pontuarMatriz(key, botao.innerText);
-        algorimoMatriz()
+		algorimoMatriz();
 	});
 });
 
 function algorimoMatriz() {
-    avaliarLinha(0, matrizDoJogo);
-    avaliarLinha(1, matrizDoJogo);
-    avaliarLinha(2, matrizDoJogo);
-    avaliarColuna(0, matrizDoJogo);
-    avaliarColuna(1, matrizDoJogo);
-    avaliarColuna(2, matrizDoJogo);
-    avaliarDiagonalPrincipal(matrizDoJogo);
-    avaliarDiagonaSecundaria(matrizDoJogo)
-    if(!fimDeJogo){
-        checarEmpate()
-    }
-    
+	avaliarLinha(0, matrizDoJogo);
+	avaliarLinha(1, matrizDoJogo);
+	avaliarLinha(2, matrizDoJogo);
+	avaliarColuna(0, matrizDoJogo);
+	avaliarColuna(1, matrizDoJogo);
+	avaliarColuna(2, matrizDoJogo);
+	avaliarDiagonalPrincipal(matrizDoJogo);
+	avaliarDiagonaSecundaria(matrizDoJogo);
+	if (!fimDeJogo) {
+		checarEmpate();
+	}
 }
 function avaliarLinha(indiceDaLinha, matriz) {
 	let p1Counter = 0;
@@ -128,14 +122,18 @@ function avaliarLinha(indiceDaLinha, matriz) {
 	//console.log({p1Counter,p2Counter})
 	if (p1Counter === 3) {
 		//alert("Player 1 ganhou");
-        document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
-        fimDeJogo = true
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador1, 1));
+		fimDeJogo = true;
 		return;
 	}
 	if (p2Counter === 3) {
 		//alert("Player 2 ganhou");
-        document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
-        fimDeJogo = true
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador2, 2));
+		fimDeJogo = true;
 		return;
 	}
 }
@@ -153,13 +151,17 @@ function avaliarColuna(indiceDaColuna, matriz) {
 		}
 	}
 	if (p1Counter === 3) {
-		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
-        fimDeJogo = true
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador1, 1));
+		fimDeJogo = true;
 		return;
 	}
 	if (p2Counter === 3) {
-		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
-        fimDeJogo = true
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador2, 2));
+		fimDeJogo = true;
 		return;
 	}
 }
@@ -183,14 +185,18 @@ function avaliarDiagonalPrincipal(matriz) {
 		}
 	}
 	if (p1Counter === 3) {
-		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
-        fimDeJogo = true
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador1, 1));
+		fimDeJogo = true;
 		return;
 	}
 	if (p2Counter === 3) {
-        document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador2, 2));
 
-        fimDeJogo = true
+		fimDeJogo = true;
 		return;
 	}
 
@@ -207,50 +213,82 @@ function avaliarDiagonaSecundaria(matriz) {
 				diagonalSecundaria.push(matriz[i][j]);
 			}
 		}
-        if (diagonalSecundaria[i] === "O") {
+		if (diagonalSecundaria[i] === "O") {
 			p1Counter++;
 		}
 		if (diagonalSecundaria[i] === "X") {
 			p2Counter++;
 		}
 	}
-    if (p1Counter === 3) {
-		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador1,1))
-        fimDeJogo = true
+	if (p1Counter === 3) {
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador1, 1));
+		fimDeJogo = true;
 		return;
 	}
 	if (p2Counter === 3) {
-		document.getElementById("area-de-pontuacao").appendChild(mostrarVencedor(nomeJogador2,2))
-        fimDeJogo = true
+		document
+			.getElementById("area-de-pontuacao")
+			.appendChild(mostrarVencedor(nomeJogador2, 2));
+		fimDeJogo = true;
 		return;
 	}
 
-    //console.log(diagonalSecundaria)
+	//console.log(diagonalSecundaria)
 }
-function checarEmpate(){
-    let counter = 0
-    for (let i = 0; i < botoes.length; i++) {
-        if(Number(botoes[i].dataset.isActive) ===1){
-            counter++
-        }
-        
-    }
-    console.log(counter)
-    if(counter===9){
-        alert("EMPATE")
-        return
-    }
+function checarEmpate() {
+	let counter = 0;
+	for (let i = 0; i < botoes.length; i++) {
+		if (Number(botoes[i].dataset.isActive) === 1) {
+			counter++;
+		}
+	}
+	console.log(counter);
+	if (counter === 9) {
+		document.getElementById("area-de-pontuacao").append(mostrarEmpate())
+		return;
+	}
 }
 
 //ACERTAR VITORIA
 
-function mostrarVencedor(nomeDoJogador,numeroDoJogador){
-
-    document.getElementById("area-de-pontuacao").innerHTML = ""
-    const container = document.createElement("div")
-    container.innerHTML = `
+function mostrarVencedor(nomeDoJogador, numeroDoJogador) {
+	document.getElementById("area-de-pontuacao").innerHTML = "";
+	const container = document.createElement("div");
+	container.id = "card-resultado";
+	container.innerHTML = `
         <h1 class="jogador-${numeroDoJogador}-vitoria">O Jogador ${numeroDoJogador} Venceu </h1>
         <h3>Nome: ${nomeDoJogador}</h3>
+        <div><button onclick="reiniciar()">JOGAR NOVAMENTE</button></div>
+    `;
+	return container;
+}
+
+function mostrarEmpate(){
+	document.getElementById("area-de-pontuacao").innerHTML = "";
+    const container = document.createElement("div")
+    container.id = "card-resultado";
+    container.innerHTML = `
+        <h1 style="text-align:center;color=#067e2b">EMPATE!</h1>
+        <div><button onclick="reiniciar()">JOGAR NOVAMENTE</button></div>
     `
     return container
-} 
+}
+
+function reiniciar() {
+	vezDoPrimeiro = true;
+    document.getElementById("card-resultado").remove()
+	matrizDoJogo = [
+		[0, 0, 0],
+		[0, 0, 0],
+		[0, 0, 0],
+	];
+	fimDeJogo = false;
+	botoes.forEach((botao, key) => {
+        botao.dataset.isActive = 0
+		botao.removeAttribute("disabled");
+		botao.style.color = "#000";
+		botao.innerText = ".";
+	});
+}
