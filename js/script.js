@@ -13,7 +13,9 @@ chooseCharactersForm.addEventListener("submit", (e) => {
 		criarCardJogador(2, nomeJogador2)
 	);
 	chooseCharactersForm.style.display = "none";
+	mostrarJogadorCorreto()
 	document.querySelector(".secao-jogo").style.display = "block";
+
 });
 
 function criarCardJogador(numeroDoJogador, nomeDoJogador) {
@@ -33,6 +35,21 @@ function criarCardJogador(numeroDoJogador, nomeDoJogador) {
 const botoes = document.querySelectorAll(".casas-itens-grid");
 console.log(botoes);
 let vezDoPrimeiro = true;
+//logica pra mostrar quem esta jogando
+function mostrarJogadorCorreto(){
+	if(vezDoPrimeiro){
+		document.getElementById("jogador-da-vez").innerText = nomeJogador1
+	}else{
+		document.getElementById("jogador-da-vez").innerText = nomeJogador2
+	}
+}
+function esconderTurnoCorreto(fimDeJogo){
+	if(fimDeJogo){
+		document.getElementById("campo-vez").style.display="none"
+	}else{
+		document.getElementById("campo-vez").style.display="block"
+	}
+}
 let matrizDoJogo = [
 	[0, 0, 0],
 	[0, 0, 0],
@@ -89,8 +106,10 @@ botoes.forEach((botao, key) => {
 			e.target.style.color = "#e39125";
 			vezDoPrimeiro = true;
 		}
+		mostrarJogadorCorreto()
 		pontuarMatriz(key, botao.innerText);
 		algorimoMatriz();
+		esconderTurnoCorreto(fimDeJogo)
 	});
 });
 
@@ -291,6 +310,8 @@ function reiniciar() {
 		[0, 0, 0],
 	];
 	fimDeJogo = false;
+	esconderTurnoCorreto(fimDeJogo)
+	mostrarJogadorCorreto()
 	botoes.forEach((botao, key) => {
         botao.dataset.isActive = 0
 		botao.removeAttribute("disabled");
